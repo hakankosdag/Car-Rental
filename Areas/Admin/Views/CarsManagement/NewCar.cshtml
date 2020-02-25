@@ -1,0 +1,63 @@
+﻿@model CarRental.Areas.Admin.Models.Cars.NewCar
+@{
+    ViewBag.Title = "New Car";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-register mx-auto mt-5">
+    <div class="card-body">
+        @using (Html.BeginForm("NewCar", "Cars", FormMethod.Post))
+        {
+            @Html.HiddenFor(m=>m.araba.Resim)
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.araba.Marka, new { @placeholder = "Marka", required="required", @class="form-control", type="text", id="model" })
+                            <label for="marka">Marka</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.araba.Model, new { @placeholder = "Model", required = "required", @class = "form-control", type = "text", id = "model" })
+                            <label for="model">Model</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.araba.Vites, new { @placeholder = "Vites", required = "required", @class = "form-control", type = "text", id = "model" })
+                            <label for="vites">Vites</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.araba.Yakit, new { @placeholder = "Yakıt", required = "required", @class = "form-control", type = "text", id = "model" })
+                            <label for="yakıt">Yakıt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.araba.Sinif, new { @placeholder = "Sınıf", required = "required", @class = "form-control", type = "text", id = "model" })
+                            <label for="sinif">Sınıf</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.araba.Fiyat, new { @placeholder = "Fiyat", required = "required", @class = "form-control", type = "text", id = "model" })
+                            <label for="fiyat">Fiyat</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Kaydet</button>
+        }
+        </div>
+</div>
