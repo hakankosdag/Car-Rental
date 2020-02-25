@@ -1,0 +1,60 @@
+﻿@model CarRental.Models.Cars.RentACarModel
+@{
+    ViewBag.Title = "Rent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="lgoin-page-wrap" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 m-auto">
+                <div class="login-page-content">
+                    <div class="login-form">
+                        <h3>RENT</h3>
+                        @using (Html.BeginForm("Rent","Cars", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(m=>m.kiralik.ArabaID)
+                        <div class="name">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.kiralik.FirstName, new { @placeholder = "First Name" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.kiralik.LastName, new { @placeholder = "Last Name" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="username">
+                            @Html.TextBoxFor(m => m.kiralik.TcNo, new { @placeholder = "Identity Number" })
+                        </div>
+                        <div class="username">
+                            @Html.TextBoxFor(m => m.kiralik.email, new { @placeholder = "E-Mail" })
+                        </div>
+                        <div class="username">
+                            @Html.TextBoxFor(m => m.kiralik.TelNo, new { @placeholder = "Phone Number" })
+                        </div>
+                        <div class="username">
+                            @Html.TextBoxFor(m => m.kiralik.Adres, new { @placeholder = "Adress" })
+                        </div>
+
+                        <div class="book-item">
+                            <div class="username">
+                                @Html.TextBoxFor(m => m.AlisTarihi, new { @placeholder = "Pick Up Date", type="date" })
+                            </div>
+
+                            <div class="username">
+                                @Html.TextBoxFor(m => m.VerisTarihi, new { @placeholder = "Return Date", type="date" })
+                            </div>
+      
+                        </div>
+                        <div class="log-btn">
+                            <button type="submit"><i class="fa fa-check-square"></i>Renting</button>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--== Login Page Content End ==-->

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="aracKiralamaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Araba">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SirketID" Type="int" />
+          <Property Name="Marka" Type="nchar" MaxLength="50" />
+          <Property Name="Model" Type="nchar" MaxLength="50" />
+          <Property Name="Vites" Type="nchar" MaxLength="20" />
+          <Property Name="Yakit" Type="nchar" MaxLength="20" />
+          <Property Name="Sinif" Type="nchar" MaxLength="20" />
+          <Property Name="Konum" Type="nchar" MaxLength="50" />
+          <Property Name="Fiyat" Type="smallint" />
+          <Property Name="Durum" Type="bit" />
+          <Property Name="Aciklama" Type="nchar" MaxLength="200" />
+          <Property Name="Resim" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Kiralik">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="TcNo" Type="varchar" MaxLength="20" />
+          <Property Name="TelNo" Type="varchar" MaxLength="15" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="Adres" Type="varchar" MaxLength="250" />
+          <Property Name="AlmaTarihi" Type="datetime" />
+          <Property Name="TeslimTarihi" Type="datetime" />
+          <Property Name="ArabaID" Type="int" />
+          <Property Name="MusteriID" Type="int" />
+        </EntityType>
+        <EntityType Name="KullaniciModel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="100" />
+          <Property Name="MusteriID" Type="int" />
+        </EntityType>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="50" />
+          <Property Name="Soyad" Type="varchar" MaxLength="50" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="TelNo" Type="varchar" MaxLength="50" />
+          <Property Name="ArabaID" Type="int" />
+          <Property Name="AlmaTarihi" Type="smalldatetime" />
+          <Property Name="TeslimTarihi" Type="smalldatetime" />
+        </EntityType>
+        <Association Name="FK__Kiralik__ArabaID__74AE54BC">
+          <End Role="Araba" Type="Self.Araba" Multiplicity="0..1" />
+          <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araba">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="ArabaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kiralik__Musteri__75A278F5">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+          <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="MusteriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Muste__71D1E811">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+          <End Role="KullaniciModel" Type="Self.KullaniciModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KullaniciModel">
+              <PropertyRef Name="MusteriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Musteri__ArabaID__5FB337D6">
+          <End Role="Araba" Type="Self.Araba" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araba">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="ArabaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="aracKiralamaDBModelStoreContainer">
+          <EntitySet Name="Araba" EntityType="Self.Araba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kiralik" EntityType="Self.Kiralik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciModel" EntityType="Self.KullaniciModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Kiralik__ArabaID__74AE54BC" Association="Self.FK__Kiralik__ArabaID__74AE54BC">
+            <End Role="Araba" EntitySet="Araba" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kiralik__Musteri__75A278F5" Association="Self.FK__Kiralik__Musteri__75A278F5">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Muste__71D1E811" Association="Self.FK__Kullanici__Muste__71D1E811">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="KullaniciModel" EntitySet="KullaniciModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Musteri__ArabaID__5FB337D6" Association="Self.FK__Musteri__ArabaID__5FB337D6">
+            <End Role="Araba" EntitySet="Araba" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="aracKiralamaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Araba" EntityType="aracKiralamaDBModel.Araba" />
+          <EntitySet Name="Musteri" EntityType="aracKiralamaDBModel.Musteri" />
+          <AssociationSet Name="FK__Musteri__ArabaID__5FB337D6" Association="aracKiralamaDBModel.FK__Musteri__ArabaID__5FB337D6">
+            <End Role="Araba" EntitySet="Araba" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <EntitySet Name="KullaniciModel" EntityType="aracKiralamaDBModel.KullaniciModel" />
+          <AssociationSet Name="FK__Kullanici__Muste__71D1E811" Association="aracKiralamaDBModel.FK__Kullanici__Muste__71D1E811">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="KullaniciModel" EntitySet="KullaniciModel" />
+          </AssociationSet>
+          <EntitySet Name="Kiralik" EntityType="aracKiralamaDBModel.Kiralik" />
+          <AssociationSet Name="FK__Kiralik__ArabaID__74AE54BC" Association="aracKiralamaDBModel.FK__Kiralik__ArabaID__74AE54BC">
+            <End Role="Araba" EntitySet="Araba" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kiralik__Musteri__75A278F5" Association="aracKiralamaDBModel.FK__Kiralik__Musteri__75A278F5">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Araba">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SirketID" Type="Int32" />
+          <Property Name="Marka" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Vites" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Yakit" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Sinif" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Konum" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Fiyat" Type="Int16" />
+          <Property Name="Durum" Type="Boolean" />
+          <Property Name="Aciklama" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Resim" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Musteri" Relationship="aracKiralamaDBModel.FK__Musteri__ArabaID__5FB337D6" FromRole="Araba" ToRole="Musteri" />
+          <NavigationProperty Name="Kiralik" Relationship="aracKiralamaDBModel.FK__Kiralik__ArabaID__74AE54BC" FromRole="Araba" ToRole="Kiralik" />
+        </EntityType>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TelNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ArabaID" Type="Int32" />
+          <Property Name="AlmaTarihi" Type="DateTime" Precision="0" />
+          <Property Name="TeslimTarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Araba" Relationship="aracKiralamaDBModel.FK__Musteri__ArabaID__5FB337D6" FromRole="Musteri" ToRole="Araba" />
+          <NavigationProperty Name="KullaniciModel" Relationship="aracKiralamaDBModel.FK__Kullanici__Muste__71D1E811" FromRole="Musteri" ToRole="KullaniciModel" />
+          <NavigationProperty Name="Kiralik" Relationship="aracKiralamaDBModel.FK__Kiralik__Musteri__75A278F5" FromRole="Musteri" ToRole="Kiralik" />
+        </EntityType>
+        <Association Name="FK__Musteri__ArabaID__5FB337D6">
+          <End Type="aracKiralamaDBModel.Araba" Role="Araba" Multiplicity="0..1" />
+          <End Type="aracKiralamaDBModel.Musteri" Role="Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araba">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="ArabaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KullaniciModel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MusteriID" Type="Int32" />
+          <NavigationProperty Name="Musteri" Relationship="aracKiralamaDBModel.FK__Kullanici__Muste__71D1E811" FromRole="KullaniciModel" ToRole="Musteri" />
+        </EntityType>
+        <Association Name="FK__Kullanici__Muste__71D1E811">
+          <End Type="aracKiralamaDBModel.Musteri" Role="Musteri" Multiplicity="0..1" />
+          <End Type="aracKiralamaDBModel.KullaniciModel" Role="KullaniciModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KullaniciModel">
+              <PropertyRef Name="MusteriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Kiralik">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TcNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AlmaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="TeslimTarihi" Type="DateTime" Precision="3" />
+          <Property Name="ArabaID" Type="Int32" />
+          <Property Name="MusteriID" Type="Int32" />
+          <NavigationProperty Name="Araba" Relationship="aracKiralamaDBModel.FK__Kiralik__ArabaID__74AE54BC" FromRole="Kiralik" ToRole="Araba" />
+          <NavigationProperty Name="Musteri" Relationship="aracKiralamaDBModel.FK__Kiralik__Musteri__75A278F5" FromRole="Kiralik" ToRole="Musteri" />
+        </EntityType>
+        <Association Name="FK__Kiralik__ArabaID__74AE54BC">
+          <End Type="aracKiralamaDBModel.Araba" Role="Araba" Multiplicity="0..1" />
+          <End Type="aracKiralamaDBModel.Kiralik" Role="Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araba">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="ArabaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kiralik__Musteri__75A278F5">
+          <End Type="aracKiralamaDBModel.Musteri" Role="Musteri" Multiplicity="0..1" />
+          <End Type="aracKiralamaDBModel.Kiralik" Role="Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="MusteriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="aracKiralamaDBModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="Araba">
+            <EntityTypeMapping TypeName="aracKiralamaDBModel.Araba">
+              <MappingFragment StoreEntitySet="Araba">
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Konum" ColumnName="Konum" />
+                <ScalarProperty Name="Sinif" ColumnName="Sinif" />
+                <ScalarProperty Name="Yakit" ColumnName="Yakit" />
+                <ScalarProperty Name="Vites" ColumnName="Vites" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="SirketID" ColumnName="SirketID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musteri">
+            <EntityTypeMapping TypeName="aracKiralamaDBModel.Musteri">
+              <MappingFragment StoreEntitySet="Musteri">
+                <ScalarProperty Name="TeslimTarihi" ColumnName="TeslimTarihi" />
+                <ScalarProperty Name="AlmaTarihi" ColumnName="AlmaTarihi" />
+                <ScalarProperty Name="ArabaID" ColumnName="ArabaID" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciModel">
+            <EntityTypeMapping TypeName="aracKiralamaDBModel.KullaniciModel">
+              <MappingFragment StoreEntitySet="KullaniciModel">
+                <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kiralik">
+            <EntityTypeMapping TypeName="aracKiralamaDBModel.Kiralik">
+              <MappingFragment StoreEntitySet="Kiralik">
+                <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+                <ScalarProperty Name="ArabaID" ColumnName="ArabaID" />
+                <ScalarProperty Name="TeslimTarihi" ColumnName="TeslimTarihi" />
+                <ScalarProperty Name="AlmaTarihi" ColumnName="AlmaTarihi" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
